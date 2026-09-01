@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warehouse Quality Treatment Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Warehouse Quality Treatment Dashboard</h1>
+      <p>Stack Quality & Treatment Monitoring</p>
+    </div>
+    <div id="dateTime"></div>
+  </header>
+
+  <main>
+    <section class="cards">
+      <div class="card"><span>Total Stacks</span><strong id="totalStacks">0</strong></div>
+      <div class="card"><span>Normal Stacks</span><strong id="normalStacks">0</strong></div>
+      <div class="card warning"><span>Under Cover</span><strong id="underCover">0</strong></div>
+      <div class="card danger"><span>Fumigation Due</span><strong id="fumigationDue">0</strong></div>
+      <div class="card"><span>Infested Stacks</span><strong id="infestedStacks">0</strong></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Stack Quality Status</h2>
+        <input id="search" type="search" placeholder="Search stack / shed / commodity">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Sr.</th><th>Shed</th><th>Stack</th><th>Commodity</th>
+              <th>Quality Status</th><th>Last Fumigation</th><th>Days</th>
+            </tr>
+          </thead>
+          <tbody id="stackTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
