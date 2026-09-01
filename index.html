@@ -1,48 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Warehouse Quality Treatment Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Godown Quality Treatment Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div>
-      <h1>Warehouse Quality Treatment Dashboard</h1>
-      <p>Stack Quality & Treatment Monitoring</p>
+<header>
+  <div><h1>GODOWN QUALITY TREATMENT DASHBOARD</h1><p>Live monitoring from Master Stock</p></div>
+  <div id="clock"></div>
+</header>
+<main>
+  <div id="connection">Connecting to Master Stock…</div>
+
+  <section class="cards">
+    <div class="card"><span>Under Cover</span><b id="cover">0</b></div>
+    <div class="card danger"><span>Fumigation Due &gt;5 Days</span><b id="due">0</b></div>
+    <div class="card danger"><span>Infested</span><b id="infested">0</b></div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <div class="title"><h2>Currently Under Cover</h2><input id="searchCover" placeholder="Search stack / shed / commodity"></div>
+      <div class="table-wrap"><table><thead><tr><th>Shed</th><th>Stack No.</th><th>Commodity</th><th>Fumigation Date</th><th>Days</th></tr></thead><tbody id="coverBody"></tbody></table></div>
     </div>
-    <div id="dateTime"></div>
-  </header>
+    <div class="panel">
+      <div class="title"><h2>Fumigation More Than 5 Days — Degassing Due</h2><input id="searchDue" placeholder="Search stack / shed / commodity"></div>
+      <div class="table-wrap"><table><thead><tr><th>Shed</th><th>Stack No.</th><th>Commodity</th><th>Last Fumigation</th><th>Days</th></tr></thead><tbody id="dueBody"></tbody></table></div>
+    </div>
+  </section>
 
-  <main>
-    <section class="cards">
-      <div class="card"><span>Total Stacks</span><strong id="totalStacks">0</strong></div>
-      <div class="card"><span>Normal Stacks</span><strong id="normalStacks">0</strong></div>
-      <div class="card warning"><span>Under Cover</span><strong id="underCover">0</strong></div>
-      <div class="card danger"><span>Fumigation Due</span><strong id="fumigationDue">0</strong></div>
-      <div class="card"><span>Infested Stacks</span><strong id="infestedStacks">0</strong></div>
-    </section>
-
-    <section class="panel">
-      <div class="panel-head">
-        <h2>Stack Quality Status</h2>
-        <input id="search" type="search" placeholder="Search stack / shed / commodity">
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Sr.</th><th>Shed</th><th>Stack</th><th>Commodity</th>
-              <th>Quality Status</th><th>Last Fumigation</th><th>Days</th>
-            </tr>
-          </thead>
-          <tbody id="stackTable"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
+  <section class="panel">
+    <div class="title"><h2>Infested Stacks</h2><input id="searchInf" placeholder="Search stack / shed / commodity"></div>
+    <div class="table-wrap"><table><thead><tr><th>Shed</th><th>Stack No.</th><th>Commodity</th><th>QC Remarks</th><th>QC Status</th></tr></thead><tbody id="infBody"></tbody></table></div>
+  </section>
+</main>
+<script src="script.js"></script>
 </body>
 </html>
