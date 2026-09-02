@@ -55,26 +55,36 @@ function commodity(r){return val(r,'Commodity / Crop Year','Commodity/Crop Year'
 function isRice(r){return /rice|frk|rra/i.test(commodity(r))}
 function receipt(r){return val(r,'Receipt Date','RDate of Receipt','RDate')}
 function parseDate(s){
-  s=String(s||'').trim();if(!s)return null;
-  let m=s.match(/^Date\((\d{4}),(\d{1,2}),(\d{1,2})(?:,.*)?\)$/);
-  if(m)return new Date(+m[1],+m[2],+m[3]);
-  m=s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/);
+  if(s===null||s===undefined||String(s).trim()==='')return null;
+  if(s instanceof Date&&!isNaN(s))return s;
+  let x=String(s).trim();
+  // Google Visualization can return dates as Date(2026,7,15)
+  let gm=x.match(/^Date\((\d{4})\s*,\s*(\d{1,2})\s*,\s*(\d{1,2})/i);
+  if(gm)return new Date(+gm[1],+gm[2],+gm[3]);
+  // dd.mm.yy / dd-mm-yyyy / dd/mm/yyyy
+  let m=x.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/);
   if(m){let y=+m[3];if(y<100)y+=2000;return new Date(y,+m[2]-1,+m[1])}
-  let d=new Date(s);return isNaN(d)?null:d;
+  // yyyy-mm-dd / yyyy/mm/dd
+  let ymd=x.match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})/);
+  if(ymd)return new Date(+ymd[1],+ymd[2]-1,+ymd[3]);
+  let d=new Date(x);return isNaN(d)?null:d;
 }
 function dateKey(s){const d=parseDate(s);return d?d.getTime():Infinity}
 function daysSince(s){const d=parseDate(s);if(!d)return '';const now=new Date();const a=new Date(d.getFullYear(),d.getMonth(),d.getDate());const b=new Date(now.getFullYear(),now.getMonth(),now.getDate());return Math.max(0,Math.floor((b-a)/86400000))}
 function fumDate(r){return val(r,'Fumigation Date','FumigationDate','Fumigation Date ')}
 function lastFum(r){return val(r,'LAST FUMIGATION','Last Fumigation','Last Fumigation Date') || fumDate(r)}
-function fumDue(r){
+function fumigationBaseDate(r){
+  // If a last/current fumigation date exists, count from it.
+  // If no fumigation has ever been entered, count from receipt date.
+  return lastFum(r) || receipt(r);
+}
+function fumigationDays(r){return daysSince(fumigationBaseDate(r));}
+function isFumigationDue(r){
   const flag=val(r,'FumigationDue_>30D_Flag','Fumigation Due','FumigationDue','Fumigation Due Flag');
-  if(isTrue(flag)) return true;
-  const lf=lastFum(r), fd=fumDate(r);
-  const d=daysSince(lf);
-  if(d!=='' && d>=30) return true;
-  // If no last-fumigation date exists, use storage period as the due basis.
-  const sp=num(val(r,'Storage Period (Days)','Storage Period','Storage Days'));
-  return !lf && sp>=30;
+  if(isTrue(flag) || /due|required|30\s*days?/i.test(String(flag))) return true;
+  const d=parseDate(fumigationBaseDate(r));
+  if(!d) return false;
+  return fumigationDays(r)>=30;
 }
 function rowEmpty(cols){return `<tr><td colspan="${cols}" class="empty">No matching stack found.</td></tr>`}
 async function loadData(){
@@ -93,7 +103,7 @@ async function loadData(){
 }
 function renderAll(){
   const under=rows.filter(r=>isTrue(val(r,'UnderCover_Flag','Under Cover','UnderCover')));
-  const fum=rows.filter(fumDue);
+  const fum=rows.filter(isFumigationDue);
   $('total').textContent=rows.length;$('wheat').textContent=rows.filter(r=>!isRice(r)).length;$('rice').textContent=rows.filter(isRice).length;
   $('underCount').textContent=under.length;$('fumCount').textContent=fum.length;$('underTotal').textContent=under.length;$('fumTotal').textContent=fum.length;
   renderUnder(under);renderFum(fum);renderPriority();
@@ -101,9 +111,8 @@ function renderAll(){
 function renderUnder(a=rows.filter(r=>isTrue(val(r,'UnderCover_Flag','Under Cover','UnderCover')))){
   $('underBody').innerHTML=a.length?a.map((r,i)=>`<tr><td>${esc(i+1)}</td><td>${esc(val(r,'Shed No.','Shed No'))}</td><td><b>${esc(val(r,'Stack No.','Stack No'))}</b></td><td>${esc(receipt(r))}</td><td>${esc(commodity(r))}</td><td>${esc(fumDate(r))}</td><td>${daysSince(fumDate(r))}</td></tr>`).join(''):rowEmpty(7);
 }
-function renderFum(a=rows.filter(fumDue)){
-
-  $('fumBody').innerHTML=a.length?a.map((r,i)=>`<tr><td>${esc(i+1)}</td><td>${esc(val(r,'Shed No.','Shed No'))}</td><td><b>${esc(val(r,'Stack No.','Stack No'))}</b></td><td>${esc(receipt(r))}</td><td>${esc(commodity(r))}</td><td>${esc(lastFum(r))}</td><td class="danger">${daysSince(lastFum(r))}</td></tr>`).join(''):rowEmpty(7);
+function renderFum(a=rows.filter(isFumigationDue)){
+  $('fumBody').innerHTML=a.length?a.map((r,i)=>`<tr><td>${esc(i+1)}</td><td>${esc(val(r,'Shed No.','Shed No'))}</td><td><b>${esc(val(r,'Stack No.','Stack No'))}</b></td><td>${esc(receipt(r))}</td><td>${esc(commodity(r))}</td><td>${esc(lastFum(r) || receipt(r))}</td><td class="danger">${fumigationDays(r)}</td></tr>`).join(''):rowEmpty(7);
 }
 function renderPriority(){
   const filter=$('priorityFilter').value;let a=rows.slice().sort((x,y)=>dateKey(receipt(x))-dateKey(receipt(y)));
