@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Status Godown No. 9, 14, 18 and 20</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:#14213d;font-family:Arial,Helvetica,sans-serif}.topbar{height:68px;background:linear-gradient(90deg,#061b46,#0d3271);color:#fff;display:flex;align-items:center;padding:8px 18px;gap:18px}.logo{font-size:38px}.headtitle{font-weight:800;font-size:28px;flex:1;text-align:center;letter-spacing:.3px}.updated{font-weight:700;font-size:14px;white-space:nowrap}.updated button{background:none;border:0;color:white;font-size:25px;cursor:pointer}.connection{margin:10px 1%;padding:7px 12px;background:#e9f7ed;border:1px solid #b7ddc1;border-radius:6px;font-size:12px}.connection.error{background:#ffe9e9;color:#a40000;border-color:#efaaaa}.top-grid{display:grid;grid-template-columns:repeat(5,1fr) 240px;gap:12px;padding:4px 1% 10px}.metric{background:white;border:1px solid #b9c6d8;border-radius:9px;text-align:center;padding:11px 6px;min-height:137px;box-shadow:0 1px 3px #0001}.metric .label{font-weight:800;font-size:16px;min-height:38px}.metric .big{font-size:47px;font-weight:800;line-height:1.05;margin:4px}.metric.blue{color:#174ea6}.metric.green{color:#258b36;border-color:#70a879}.metric.purple{color:#643b92}.metric.red{color:#b20d17;border-color:#c85b62}.metric.orange{color:#dc7a00;border-color:#e0a05d}.quick{background:#0d2f69;border-radius:9px;padding:10px;color:#fff}.quick h3{text-align:center;margin:2px 0 10px;font-size:16px}.q{display:block;color:white;text-decoration:none;font-weight:800;text-align:center;border-radius:7px;padding:16px 6px;margin:8px 0;border:1px solid #fff8;font-size:15px}.qc{background:#ef8b00}.master{background:#2d923a}.rice{background:#2360b6}.wheat{background:#693c93}.middle-grid,.details-grid{display:grid;grid-template-columns:1.05fr 1.35fr 1.35fr;gap:12px;padding:0 1% 12px}.panel,.detail,.searchbox{background:white;border:1px solid #b9c6d8;border-radius:9px;overflow:hidden;min-height:270px}.panel h2,.detail h2,.searchbox h2{margin:0;background:#0d2f69;color:#fff;padding:10px;text-align:center;font-size:16px}.summary table,.detail table{width:100%;border-collapse:collapse}.summary th,.summary td,.detail th,.detail td{padding:10px 9px;border:1px solid #d5dbe4;font-size:13px}.summary th{background:#e9eef6}.summary td:nth-child(2),.summary td:nth-child(3){text-align:center}.totalrow{font-weight:800;background:#f1f3f6}.donut{display:flex;flex-direction:column;align-items:center}.donut-chart{width:185px;height:185px;border-radius:50%;margin:14px 0 8px;background:conic-gradient(#f28c00 0 31%,#a7a7a7 31% 82%,#c41620 82% 100%);display:grid;place-items:center}.donut-chart>div{width:93px;height:93px;border-radius:50%;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center}.donut-chart b{font-size:22px}.donut-chart small{font-weight:800}.statusdonut{background:conic-gradient(#3475c4 0 71%,#c94646 71% 82%,#86a63d 82% 100%)}.legend{display:flex;gap:13px;font-size:12px;flex-wrap:wrap;justify-content:center;padding:6px}.details-grid{align-items:stretch}.detail{min-height:340px}.redpanel h2{background:#c10d18}.orangepanel h2{background:#ec8500}.tablewrap{overflow:auto;max-height:260px}.detail th{background:#f1f3f8}.detail footer{text-align:center;padding:11px;background:#fff0f0;color:#b00;font-size:14px}.orangepanel footer{background:#fff5e8}.searchbox{padding-bottom:5px}.searchbox h2{margin-bottom:8px}.searchbox input{margin:0 12px 8px;width:calc(100% - 24px);padding:11px;border:1px solid #c9d1dc;border-radius:6px}.result{display:flex;justify-content:space-between;padding:8px 13px;border-top:1px solid #e1e5ea;font-size:13px}.result span{font-weight:700}.guide{margin:0 1% 8px;background:white;border:1px solid #b9c6d8;border-radius:8px;display:flex;align-items:center;justify-content:space-around;text-align:center;overflow:hidden}.guide>strong{background:#0d2f69;color:white;padding:16px 35px}.guide span{font-weight:800;font-size:13px;padding:7px}.guide small{font-weight:400;color:#333}.note{margin:0 1% 15px;padding:10px 14px;font-size:13px;background:white;border:1px solid #d2d8e0;border-radius:7px}.note b:last-child{float:right}@media(max-width:1100px){.top-grid{grid-template-columns:repeat(3,1fr)}.quick{grid-column:span 3}.middle-grid,.details-grid{grid-template-columns:1fr 1fr}.searchbox{grid-column:span 2}}@media(max-width:650px){.headtitle{font-size:17px}.updated{font-size:11px}.topbar{height:auto}.top-grid,.middle-grid,.details-grid{grid-template-columns:1fr}.quick,.searchbox{grid-column:auto}.guide{flex-wrap:wrap}.guide>strong{width:100%}.note b:last-child{float:none;display:block;margin-top:8px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">🏭</div>
+  <div class="headtitle">STATUS GODOWN NO. 9, 14, 18 AND 20</div>
+  <div class="updated">Last Updated : <span id="updated">--</span> <button onclick="loadData()" title="Refresh">↻</button></div>
+</header>
+
+<main>
+  <div id="connection" class="connection">Connecting to Google Sheet…</div>
+
+  <section class="top-grid">
+    <div class="metric blue"><div class="label">TOTAL STACK</div><div class="big" id="total">0</div><div>All Stacks</div></div>
+    <div class="metric green"><div class="label">FULL STACK</div><div class="big" id="full">0</div><div>Full Stacks</div></div>
+    <div class="metric purple"><div class="label">EMPTY STACK</div><div class="big" id="empty">0</div><div>Empty Stacks</div></div>
+    <div class="metric red"><div class="label">INFESTED /<br>UNDER COVER</div><div class="big" id="attention">0</div><div>Requires Attention</div></div>
+    <div class="metric orange"><div class="label">FUMIGATION DUE</div><div class="big" id="fumDue">0</div><div>Due for Fumigation</div></div>
+
+    <aside class="quick">
+      <h3>QUICK NAVIGATION</h3>
+      <a id="qcLink" target="_blank" class="q qc">☷ &nbsp; QC DETAILS</a>
+      <a id="masterLink" target="_blank" class="q master">▤ &nbsp; MASTER</a>
+      <a id="riceLink" target="_blank" class="q rice">🌾 &nbsp; RICE PRIORITY</a>
+      <a id="wheatLink" target="_blank" class="q wheat">🌾 &nbsp; WHEAT PRIORITY</a>
+    </aside>
+  </section>
+
+  <section class="middle-grid">
+    <div class="summary panel">
+      <h2>STACK TYPE SUMMARY</h2>
+      <table><thead><tr><th>STACK TYPE</th><th>COUNT</th><th>%</th></tr></thead>
+      <tbody>
+        <tr><td>🟠 Wheat</td><td id="wheatCount">0</td><td id="wheatPct">0%</td></tr>
+        <tr><td>⚪ Rice (FRK + RRA)</td><td id="riceCount">0</td><td id="ricePct">0%</td></tr>
+        <tr><td>🔴 Empty Stack</td><td id="emptyCount">0</td><td id="emptyPct">0%</td></tr>
+        <tr class="totalrow"><td>TOTAL</td><td id="sumCount">0</td><td>100%</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="donut panel"><h2>STACK TYPE</h2><div class="donut-chart" id="stackDonut"><div><b id="donutTotal">0</b><small>TOTAL</small></div></div><div class="legend"><span>🟠 Wheat</span><span>⚪ Rice</span><span>🔴 Empty</span></div></div>
+
+    <div class="donut panel"><h2>INFESTATION STATUS</h2><div class="donut-chart statusdonut" id="statusDonut"><div><b id="clearCount">0</b><small>CLEAR</small></div></div><div class="legend"><span>🔵 Clear</span><span>🔴 Infested / Under Cover</span><span>🟢 Fumigation Due</span></div></div>
+  </section>
+
+  <section class="details-grid">
+    <div class="detail redpanel">
+      <h2>🐞 &nbsp; INFESTED / UNDER COVER DETAILS</h2>
+      <div class="tablewrap"><table><thead><tr><th>Stack No.</th><th>Commodity</th><th>Fumigation Date</th><th>Days</th></tr></thead><tbody id="attentionBody"></tbody></table></div>
+      <footer>Total Infested / Under Cover : <b id="attentionTotal">0</b></footer>
+    </div>
+
+    <div class="detail orangepanel">
+      <h2>🧯 &nbsp; FUMIGATION DUE DETAILS</h2>
+      <div class="tablewrap"><table><thead><tr><th>Stack No.</th><th>Commodity</th><th>Last Fumigation</th><th>Days</th><th>Status</th></tr></thead><tbody id="dueBody"></tbody></table></div>
+      <footer>Total Fumigation Due : <b id="dueTotal">0</b></footer>
+    </div>
+
+    <aside class="searchbox">
+      <h2>SEARCH STACK</h2>
+      <input id="search" placeholder="Enter Stack No.">
+      <div class="result"><b>Stack No.</b><span id="sStack">-</span></div>
+      <div class="result"><b>Commodity</b><span id="sCommodity">-</span></div>
+      <div class="result"><b>Date of Receipt</b><span id="sReceipt">-</span></div>
+      <div class="result"><b>Last Fumigation</b><span id="sLast">-</span></div>
+      <div class="result"><b>Fumigation Days</b><span id="sDays">-</span></div>
+      <div class="result"><b>Status</b><span id="sStatus">-</span></div>
+    </aside>
+  </section>
+
+  <section class="guide"><strong>STATUS GUIDE</strong><span>🟢 NORMAL<br><small>Fumigation Days &lt; 25</small></span><span>🟠 WARNING<br><small>Fumigation Days 25 - 30</small></span><span>🔴 DUE<br><small>Fumigation Days &gt; 30</small></span><span>🟣 ATTENTION<br><small>Infested / Under Cover</small></span></section>
+  <div class="note">ⓘ <b>Note :</b> All days are calculated from Last Fumigation Date using TODAY() &nbsp;&nbsp;&nbsp; <b>Keep Stack Safe, Keep Quality Safe!</b></div>
+</main>
+<script>
+const SHEET_ID="1igJ0rzEp3txMDdhjwjrMB5V9BkJcyjt74g1xWh3YSHo";
+const MASTER_SHEET="Master Stock";
+const QC_SHEET="QC Tracker";
+const REFRESH_MS=30000;
+const masterUrl=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`;
+["masterLink","qcLink","riceLink","wheatLink"].forEach(id=>{const e=document.getElementById(id);if(e)e.href=masterUrl});
+let data=[],dueData=[];
+const n=x=>String(x??"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const norm=n;
+function parseDate(v){
+  if(v===null||v===undefined||String(v).trim()==="") return null;
+  v=String(v).trim();
+  let m=v.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/);
+  if(m){let y=+m[3];if(y<100)y+=2000;const d=new Date(y,+m[2]-1,+m[1]);return isNaN(d)?null:d}
+  m=v.match(/^(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2})/);
+  if(m){const d=new Date(+m[1],+m[2]-1,+m[3]);return isNaN(d)?null:d}
+  const d=new Date(v);return isNaN(d)?null:d;
+}
+function days(v){const d=parseDate(v);return d?Math.max(0,Math.floor((Date.now()-d.getTime())/86400000)):""}
+function find(headers,names){const H=headers.map(norm);for(const name of names){const q=norm(name),i=H.indexOf(q);if(i>=0)return i}for(const name of names){const q=norm(name),i=H.findIndex(h=>h.includes(q)||q.includes(h));if(i>=0)return i}return -1}
+function val(r,i){return i>=0?String(r[i]??"").trim():""}
+function fetchSheet(sheet){return new Promise((resolve,reject)=>{
+  const cb="sheetCB_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  const s=document.createElement("script");let done=false;
+  const clean=()=>{try{delete window[cb]}catch(e){window[cb]=undefined}s.remove()};
+  const timer=setTimeout(()=>{if(!done){done=true;clean();reject(Error("Google Sheet request timed out"))}},15000);
+  window[cb]=obj=>{if(done)return;done=true;clearTimeout(timer);clean();resolve(obj)};
+  s.onerror=()=>{if(!done){done=true;clearTimeout(timer);clean();reject(Error("Google Sheet request failed"))}};
+  const q=encodeURIComponent("select *");
+  s.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheet)}&headers=1&tqx=out:json%3BresponseHandler:${cb}&tq=${q}&_=${Date.now()}`;
+  document.head.appendChild(s);
+})}
+function records(j){
+  const headers=(j.table?.cols||[]).map(c=>c.label||c.id||"");
+  const rows=(j.table?.rows||[]).map(x=>(x.c||[]).map(c=>c?(c.f??c.v??""):""));
+  return {headers,rows};
+}
+function makeMaster(j){
+  const {headers,rows}=records(j);
+  const ix={shed:find(headers,["Shed No.","Shed"]),stack:find(headers,["Stack No.","Stack"]),comm:find(headers,["Commodity / Crop Year","Commodity","Crop Year"]),receipt:find(headers,["Receipt Date","RDate of receipt","Date of Receipt"]),status:find(headers,["Status","QC Status"]),fum:find(headers,["Fumigation Date","Fumigation"]),last:find(headers,["LAST FUMIGATION","Last Fumigation Date","Last Fumigation"]),remarks:find(headers,["QC Remarks","Remarks"]),cover:find(headers,["UnderCover_Flag","Under Cover","UnderCover"]),due:find(headers,["FumigationDue_>30D_Flag","Fumigation Due","FumigationDue","DegassingDue_Flag","Degassing Due"]),qty:find(headers,["Qty (MT)","Qty","Quantity"]),cat:find(headers,["Cat","Category"])};
+  return rows.filter(r=>r.some(x=>String(x).trim()!=="")).map(r=>{
+    const st=val(r,ix.status),rm=val(r,ix.remarks),cv=val(r,ix.cover);
+    const cover=/under\s*cover|covered|yes|true|1/.test(norm(cv))||/under\s*cover/.test(norm(st));
+    const inf=/infest/.test(norm(st))||/infest/.test(norm(rm));
+    const empty=/empty/.test(norm(st))||/empty/.test(norm(rm));
+    return {shed:val(r,ix.shed),stack:val(r,ix.stack),comm:val(r,ix.comm),receipt:val(r,ix.receipt),status:st,fum:val(r,ix.fum),last:val(r,ix.last),days:days(val(r,ix.last)),remarks:rm,cover,inf,empty,qty:val(r,ix.qty),cat:val(r,ix.cat)};
+  });
+}
+function makeDue(j){
+  const {headers,rows}=records(j);
+  const ix={shed:find(headers,["Shed No.","Shed"]),stack:find(headers,["Stack No.","Stack"]),comm:find(headers,["Commodity / Crop Year","Commodity","Crop Year"]),last:find(headers,["LAST FUMIGATION","Last Fumigation Date","Last Fumigation"]),period:find(headers,["Fumigation Period","Days Since Last Fumigation"])};
+  return rows.filter(r=>r.some(x=>String(x).trim()!=="")).map(r=>{
+    const last=val(r,ix.last);
+    const dy=days(last);
+    return {shed:val(r,ix.shed),stack:val(r,ix.stack),comm:val(r,ix.comm),last,days:dy};
+  }).filter(x=>x.last!=="" && x.days!=="" && x.days>=30);
+}
+function esc(x){return String(x??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+function pct(x,t){return t?((x/t)*100).toFixed(2)+"%":"0%"}
+function render(){
+  const total=data.length,empty=data.filter(x=>x.empty||(!x.comm&&!x.stack)).length;
+  const wheat=data.filter(x=>/wheat/.test(n(x.comm))).length;
+  const rice=data.filter(x=>/rice|frk|rra/.test(n(x.comm))&&!/wheat/.test(n(x.comm))).length;
+  const att=data.filter(x=>x.inf||x.cover), due=dueData, full=Math.max(0,total-empty);
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+  set("total",total);set("full",full);set("empty",empty);set("attention",att.length);set("fumDue",due.length);set("wheatCount",wheat);set("riceCount",rice);set("emptyCount",empty);set("wheatPct",pct(wheat,total));set("ricePct",pct(rice,total));set("emptyPct",pct(empty,total));set("sumCount",total);set("donutTotal",total);set("clearCount",Math.max(0,total-att.length-due.length));set("attentionTotal",att.length);set("dueTotal",due.length);set("updated",new Date().toLocaleString());
+  const ab=document.getElementById("attentionBody"),db=document.getElementById("dueBody");
+  if(ab)ab.innerHTML=att.length?att.map(x=>`<tr><td>${esc(x.stack)}</td><td>${esc(x.comm)}</td><td>${esc(x.fum)}</td><td>${esc(x.days)}</td></tr>`).join(""):`<tr><td colspan="4">No stacks found</td></tr>`;
+  if(db)db.innerHTML=due.length?due.map(x=>`<tr><td>${esc(x.stack)}</td><td>${esc(x.comm)}</td><td>${esc(x.last)}</td><td>${esc(x.days)}</td><td><b>DUE (≥30 Days)</b></td></tr>`).join(""):`<tr><td colspan="5">No stacks found</td></tr>`;
+}
+async function loadData(){
+  try{const [m,q]=await Promise.all([fetchSheet(MASTER_SHEET),fetchSheet(QC_SHEET)]);data=makeMaster(m);dueData=makeDue(q);render();}
+  catch(e){console.error(e);const db=document.getElementById("dueBody");if(db)db.innerHTML=`<tr><td colspan="5">Unable to load Google Sheet data</td></tr>`;}
+}
+const search=document.getElementById("search");
+if(search)search.addEventListener("input",function(){const q=n(this.value),x=data.find(r=>n(r.stack)===q||n(r.stack).includes(q))||dueData.find(r=>n(r.stack)===q||n(r.stack).includes(q));["sStack","sCommodity","sReceipt","sLast","sDays","sStatus"].forEach((id,i)=>{const e=document.getElementById(id);if(e)e.textContent=x?[x.stack,x.comm,x.receipt||"",x.last,x.days,x.status||""][i]||"-":"-"})});
+loadData();setInterval(loadData,REFRESH_MS);
+</script>
+</body>
+</html>
