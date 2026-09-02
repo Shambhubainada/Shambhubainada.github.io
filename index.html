@@ -50,6 +50,8 @@ const $=id=>document.getElementById(id);
 function esc(x){return String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function val(r,...names){for(const n of names){if(r[n]!==undefined&&r[n]!==null&&String(r[n]).trim()!=='')return String(r[n]).trim()}return ''}
 function num(x){const n=parseFloat(String(x??'').replace(/,/g,''));return Number.isFinite(n)?n:0}
+function periodDays(r){const candidates=['Period','Storage Period','Storage Period (Days)','Period (Days)','Days','Storage Days','Period_Days'];for(const k of candidates){const v=val(r,k);const n=num(v);if(v!==''&&Number.isFinite(n))return n}const rf=val(r,'Receipt Date','RDate of Receipt','RDate');const n=daysSince(rf);return n===''?0:n}
+function isFumDue(r){return periodDays(r)>30}
 function isTrue(x){return /^(true|yes|y|1|under\s*cover|due|required|yes\s*\(?.*\)?)$/i.test(String(x).trim())}
 function commodity(r){return val(r,'Commodity / Crop Year','Commodity/Crop Year','Commodity','Crop Year')}
 function isRice(r){return /rice|frk|rra/i.test(commodity(r))}
@@ -76,7 +78,7 @@ async function loadData(){
 }
 function renderAll(){
   const under=rows.filter(r=>isTrue(val(r,'UnderCover_Flag','Under Cover','UnderCover')));
-  const fum=rows.filter(r=>isTrue(val(r,'FumigationDue_>30D_Flag','Fumigation Due','FumigationDue')));
+  const fum=rows.filter(isFumDue);
   $('total').textContent=rows.length;$('wheat').textContent=rows.filter(r=>!isRice(r)).length;$('rice').textContent=rows.filter(isRice).length;
   $('underCount').textContent=under.length;$('fumCount').textContent=fum.length;$('underTotal').textContent=under.length;$('fumTotal').textContent=fum.length;
   renderUnder(under);renderFum(fum);renderPriority();
@@ -84,8 +86,9 @@ function renderAll(){
 function renderUnder(a=rows.filter(r=>isTrue(val(r,'UnderCover_Flag','Under Cover','UnderCover')))){
   $('underBody').innerHTML=a.length?a.map((r,i)=>`<tr><td>${esc(i+1)}</td><td>${esc(val(r,'Shed No.','Shed No'))}</td><td><b>${esc(val(r,'Stack No.','Stack No'))}</b></td><td>${esc(receipt(r))}</td><td>${esc(commodity(r))}</td><td>${esc(fumDate(r))}</td><td>${daysSince(fumDate(r))}</td></tr>`).join(''):rowEmpty(7);
 }
-function renderFum(a=rows.filter(r=>isTrue(val(r,'FumigationDue_>30D_Flag','Fumigation Due','FumigationDue')))){
-  $('fumBody').innerHTML=a.length?a.map((r,i)=>`<tr><td>${esc(i+1)}</td><td>${esc(val(r,'Shed No.','Shed No'))}</td><td><b>${esc(val(r,'Stack No.','Stack No'))}</b></td><td>${esc(receipt(r))}</td><td>${esc(commodity(r))}</td><td>${esc(lastFum(r))}</td><td class="danger">${daysSince(lastFum(r))}</td></tr>`).join(''):rowEmpty(7);
+function renderFum(a=rows.filter(isFumDue)){
+
+  $('fumBody').innerHTML=a.length?a.map((r,i)=>`<tr><td>${esc(i+1)}</td><td>${esc(val(r,'Shed No.','Shed No'))}</td><td><b>${esc(val(r,'Stack No.','Stack No'))}</b></td><td>${esc(receipt(r))}</td><td>${esc(commodity(r))}</td><td>${esc(lastFum(r))}</td><td class="danger">${periodDays(r)}</td></tr>`).join(''):rowEmpty(7);
 }
 function renderPriority(){
   const filter=$('priorityFilter').value;let a=rows.slice().sort((x,y)=>dateKey(receipt(x))-dateKey(receipt(y)));
